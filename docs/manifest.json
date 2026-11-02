@@ -1,0 +1,8 @@
+{
+  "about": "Metadata for files that cannot carry front matter. Markdown files carry their own front matter. A file with no metadata in either place has unknown audience.",
+  "files": {
+    "price-list.csv": { "title": "Price list", "audience": "public", "effective": "2026-10-01" },
+    "contractor-account-terms.pdf": { "title": "Contractor account terms", "audience": "public", "effective": "2026-07-01" },
+    "old-website-faq.html": { "title": "General questions", "audience": "public", "effective": "2024-06-01" }
+  }
+}

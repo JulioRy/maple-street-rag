@@ -1,0 +1,111 @@
+sku,name,category,price_usd,unit,in_stock,aisle
+DR-18V,"Cordless Drill 18V (tool only, no battery or charger)",Power tools,89.99,each,yes,1
+DR-20B,Cordless Drill 20V Brushless Kit (2 batteries + charger),Power tools,149.00,each,yes,1
+BT-18,18V Battery 2.0Ah,Power tools,49.99,each,yes,1
+CG-18,18V Battery Charger,Power tools,29.99,each,yes,1
+CS-7,Circular Saw 7-1/4 in,Power tools,119.00,each,yes,1
+SD-PRO,Impact Driver 20V,Power tools,129.00,each,no,1
+JS-6,Jigsaw 6 amp (corded),Power tools,59.99,each,yes,1
+OS-5,Random Orbit Sander 5 in,Power tools,69.99,each,yes,1
+BS-20,Drill Bit Set 20 piece,Power tools,24.99,set,yes,1
+HM-16,Claw Hammer 16 oz,Hand tools,14.99,each,yes,2
+HM-20,Framing Hammer 20 oz,Hand tools,24.99,each,yes,2
+TM-25,Tape Measure 25 ft,Hand tools,12.49,each,yes,2
+TM-16,Tape Measure 16 ft,Hand tools,8.99,each,yes,2
+LV-24,Level 24 in,Hand tools,19.99,each,yes,2
+LV-48,Level 48 in,Hand tools,34.99,each,yes,2
+SC-6,Screwdriver Set (6 piece),Hand tools,16.99,set,yes,2
+PL-3,Pliers Set (3 piece),Hand tools,19.99,set,yes,2
+WR-ADJ,Adjustable Wrench 10 in,Hand tools,13.49,each,yes,2
+SK-40,Socket Set 40 piece,Hand tools,39.99,set,yes,2
+UK-1,Utility Knife,Hand tools,6.99,each,yes,2
+HS-15,Hand Saw 15 in,Hand tools,17.99,each,yes,2
+PB-12,Pry Bar 12 in,Hand tools,9.99,each,yes,2
+PT-INT-G,Interior Latex Paint (gallon),Paint,38.99,gallon,yes,3
+PT-INT-Q,Interior Latex Paint (quart),Paint,16.99,quart,yes,3
+PT-EXT-G,Exterior Paint (gallon),Paint,46.99,gallon,yes,3
+PR-G,Drywall Primer (gallon),Paint,24.99,gallon,yes,3
+ST-DK-G,"Deck Stain, semi-transparent (gallon)",Paint,42.99,gallon,yes,3
+RL-9,Paint Roller Kit 9 in,Paint,13.99,each,yes,3
+RC-38,Roller Covers 9 in 3/8 nap (3 pack),Paint,9.99,pack,yes,3
+RC-12,Roller Covers 9 in 1/2 nap (3 pack),Paint,10.99,pack,yes,3
+BR-2A,Angled Brush 2 in,Paint,8.49,each,yes,3
+TP-BL,Painter's Tape 1.88 in x 60 yd,Paint,7.49,roll,yes,3
+DC-9,Drop Cloth 9 x 12 ft,Paint,11.99,each,yes,3
+SPK-8,Spackle 8 oz,Paint,5.49,each,yes,3
+RP-NY,Nylon Rope 3/8 in,Hardware,0.49,foot,yes,6
+CH-ZN,Zinc Chain 1/4 in,Hardware,2.29,foot,yes,6
+HK-S,S-Hooks (10 pack),Hardware,4.99,pack,yes,6
+PD-40,Padlock 40 mm,Hardware,11.99,each,yes,6
+DH-SN,Door Hinge 3.5 in satin nickel (2 pack),Hardware,7.99,pack,yes,6
+KN-ENT,"Entry Door Knob, keyed",Hardware,29.99,each,yes,6
+DB-SC,Deadbolt single cylinder,Hardware,34.99,each,yes,6
+SC-DK,Deck Screws 3 in (1 lb box),Fasteners,9.99,box,yes,7
+SC-DK25,Deck Screws 2-1/2 in (1 lb box),Fasteners,9.49,box,yes,7
+SC-DW,Drywall Screws 1-5/8 in (1 lb box),Fasteners,7.99,box,yes,7
+NL-CM,Common Nails 3 in (1 lb box),Fasteners,6.49,box,yes,7
+NL-FN,Finish Nails 2 in (1 lb box),Fasteners,6.99,box,yes,7
+AN-PL,Plastic Wall Anchors (50 pack),Fasteners,4.49,pack,yes,7
+BL-38,Carriage Bolts 3/8 x 4 in (10 pack),Fasteners,8.99,pack,yes,7
+LB-2408,Lumber 2x4x8 ft,Lumber,4.98,board,yes,Yard
+LB-2410,Lumber 2x4x10 ft,Lumber,6.48,board,yes,Yard
+LB-2608,Lumber 2x6x8 ft,Lumber,7.98,board,yes,Yard
+LB-PT48,Pressure-Treated 4x4x8 ft,Lumber,12.98,board,yes,Yard
+PW-12,Plywood 4x8 ft 1/2 in,Lumber,42.99,sheet,yes,Yard
+PW-34,Plywood 4x8 ft 3/4 in,Lumber,58.99,sheet,yes,Yard
+DW-12,Drywall 4x8 ft 1/2 in,Lumber,15.98,sheet,yes,Yard
+FB-PVC,PVC Pipe 1/2 in x 10 ft,Plumbing,4.29,each,yes,8
+FB-CPL,PVC Coupling 1/2 in,Plumbing,0.59,each,yes,8
+FB-PEX,PEX Tubing 1/2 in x 100 ft,Plumbing,39.99,roll,yes,8
+FC-KIT,Faucet Cartridge Repair Kit,Plumbing,14.99,each,yes,8
+FL-WAX,Toilet Wax Ring,Plumbing,4.99,each,yes,8
+FL-FLP,Toilet Flapper,Plumbing,6.99,each,yes,8
+PL-TFL,Plumber's Tape,Plumbing,1.99,roll,yes,8
+PL-PLG,Plunger,Plumbing,9.99,each,yes,8
+DR-CLN,Drain Cleaner 32 oz,Plumbing,8.99,each,yes,8
+LB-24,Light Bulbs LED 60W equivalent (4 pack),Electrical,8.99,pack,yes,9
+LB-100,Light Bulbs LED 100W equivalent (2 pack),Electrical,9.99,pack,yes,9
+EX-25,Extension Cord 25 ft,Electrical,17.99,each,yes,9
+EX-50,Extension Cord 50 ft outdoor,Electrical,29.99,each,yes,9
+PS-6,Power Strip 6 outlet,Electrical,12.99,each,yes,9
+OT-GF,GFCI Outlet,Electrical,19.99,each,yes,9
+SW-SP,Light Switch single pole,Electrical,2.49,each,yes,9
+WN-12,Wire Nuts assorted (25 pack),Electrical,4.99,pack,yes,9
+TS-NC,Non-contact Voltage Tester,Electrical,19.99,each,yes,9
+SP-1,Smoke Detector,Safety,24.99,each,yes,10
+CO-1,Carbon Monoxide Detector,Safety,34.99,each,yes,10
+FE-5,Fire Extinguisher 5 lb,Safety,44.99,each,yes,10
+GL-WK,Work Gloves,Safety,9.99,pair,yes,10
+GG-1,Safety Glasses,Safety,5.99,each,yes,10
+MK-N95,Dust Masks N95 (10 pack),Safety,14.99,pack,yes,10
+EP-1,Ear Plugs (20 pairs),Safety,4.99,pack,yes,10
+GH-50,Garden Hose 50 ft,Outdoor,29.99,each,yes,11
+SN-NZ,Hose Spray Nozzle,Outdoor,7.99,each,yes,11
+RK-LF,Leaf Rake,Outdoor,19.99,each,yes,11
+SH-RP,Round Point Shovel,Outdoor,27.99,each,yes,11
+WB-6,Wheelbarrow 6 cu ft,Outdoor,89.99,each,no,11
+BG-LF,Lawn and Leaf Bags (10 pack),Outdoor,5.99,pack,yes,11
+PX-20,Propane Tank Exchange 20 lb,Outdoor,22.99,each,yes,Outside cage
+GB-BR,Grill Brush,Outdoor,9.99,each,yes,11
+SS-24,Snow Shovel 24 in,Seasonal,29.99,each,no,12
+SS-18,Snow Shovel 18 in,Seasonal,22.99,each,yes,12
+IM-50,Ice Melt 50 lb bag,Seasonal,18.99,bag,yes,12
+RS-50,Rock Salt 50 lb bag,Seasonal,9.99,bag,yes,12
+SB-ICE,Ice Scraper and Snow Brush,Seasonal,8.99,each,yes,12
+WS-KT,Window Insulation Kit,Seasonal,12.99,kit,yes,12
+WS-DS,Door Draft Stopper,Seasonal,11.99,each,yes,12
+HT-SP,Space Heater 1500W,Seasonal,49.99,each,yes,12
+CL-SP,Spray Cleaner All-Purpose,Cleaning,4.99,each,yes,13
+CL-BKT,Bucket 5 gallon,Cleaning,4.49,each,yes,13
+CL-MOP,Mop with Wringer,Cleaning,24.99,each,yes,13
+CL-SHV,Shop Vacuum 6 gallon,Cleaning,79.99,each,yes,13
+AD-CK,"Caulk, white silicone",Adhesives,6.99,tube,yes,5
+AD-CG,Caulk Gun,Adhesives,7.99,each,yes,5
+AD-WG,Wood Glue 8 oz,Adhesives,5.49,each,yes,5
+AD-CON,Construction Adhesive 10 oz,Adhesives,5.99,tube,yes,5
+AD-DT,Duct Tape 1.88 in x 60 yd,Adhesives,8.99,roll,yes,5
+AD-SG,Super Glue 2 g (2 pack),Adhesives,4.99,pack,yes,5
+KB-STD,Standard Key Copy,Keys,3.49,each,yes,Service counter
+GC-25,Gift Card $25,Gift cards,25.00,each,yes,Registers
+GC-50,Gift Card $50,Gift cards,50.00,each,yes,Registers
+GC-100,Gift Card $100,Gift cards,100.00,each,yes,Registers
