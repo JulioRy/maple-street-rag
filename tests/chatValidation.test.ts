@@ -8,6 +8,7 @@ function fakeServices(overrides: Partial<AppServices> = {}): AppServices {
     answer: vi.fn(async () => ({ answer: "ok", outcome: "answer" as const, sources: [] })),
     runIngest: vi.fn(async () => ({ indexed: [], skipped: [], chunks: 0 })),
     retrieve: vi.fn(async () => []),
+    usage: vi.fn(() => ({})),
     ...overrides,
   };
 }

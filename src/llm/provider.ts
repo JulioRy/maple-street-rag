@@ -121,7 +121,9 @@ async function callWithRetry<T>(timeoutMs: number, request: (abortSignal: AbortS
         throw new ModelError(status ? `provider returned HTTP ${status}` : describe(error));
       }
       const waitMs = Math.min(retryDelayMs(error, attempt), MAX_RATE_LIMIT_WAIT_MS);
-      console.warn(`Model request failed with HTTP ${status}, retry ${attempt}/${MAX_ATTEMPTS - 1} in ${waitMs} ms`);
+      console.warn(
+        `Model request failed with HTTP ${status}, retry ${attempt}/${MAX_ATTEMPTS - 1} in ${waitMs} ms: ${describe(error).slice(0, 300)}`,
+      );
       await sleep(waitMs);
     } finally {
       clearTimeout(timer);

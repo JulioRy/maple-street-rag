@@ -63,6 +63,14 @@ Context used to weigh them: ~2h budget, ~140 chunks, 58 + ~20 hidden eval cases,
 - Trade-off accepted: ~40 more lines of code.
 - Would switch to: adding an LLM reranker if retrieval failures show up in the eval.
 
+### Embedding cache (added after an E2E failure)
+- What happened: the second `POST /ingest` failed with HTTP 429 from Gemini, because re-ingest re-embedded all 164 chunks and the free tier counts every text in a batch.
+- Options: A) slower retries; B) in-memory cache keyed by text; C) in-memory + on-disk cache (`.cache/embeddings.json`, git-ignored), keyed by model and text hash.
+- Chosen: C, as a wrapper around the provider (`withEmbeddingCache`), so the rest of the code does not know it exists.
+- Why (in this context): a live `/ingest` after adding one document now embeds only that document's chunks (measured: 1 embedding call, 0 for an unchanged folder).
+  Restarts during eval iterations cost no quota.
+- Trade-off accepted: a ~6 MB local file; it is only an optimization, so a missing or corrupt file is ignored.
+
 ### k (chunks sent to the model)
 - Options: A) k=4; B) k≈8; C) the whole public corpus.
 - Chosen: B

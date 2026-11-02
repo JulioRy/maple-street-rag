@@ -7,8 +7,13 @@ const retrieveQuerySchema = z.object({
   k: z.coerce.number().int().min(1).max(50).default(5),
 });
 
-export function debugRouter(retrieve: (query: string, k: number) => Promise<ScoredChunk[]>): Router {
+export function debugRouter(retrieve: (query: string, k: number) => Promise<ScoredChunk[]>, usage: () => unknown): Router {
   const router = Router();
+
+  // Cumulative token usage since the server started; the eval reads it before and after a run.
+  router.get("/debug/usage", (_req, res) => {
+    res.json(usage());
+  });
 
   router.get("/debug/retrieve", async (req, res) => {
     const parsed = retrieveQuerySchema.safeParse(req.query);

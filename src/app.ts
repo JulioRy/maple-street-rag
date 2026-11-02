@@ -10,6 +10,7 @@ export interface AppServices {
   answer(request: ChatRequest): Promise<ChatResponse>;
   runIngest(): Promise<IngestReport>;
   retrieve(query: string, k: number): Promise<ScoredChunk[]>;
+  usage(): unknown;
 }
 
 export function createApp(services: AppServices): express.Express {
@@ -18,7 +19,12 @@ export function createApp(services: AppServices): express.Express {
 
   app.use(chatRouter((request) => services.answer(request)));
   app.use(ingestRouter(() => services.runIngest()));
-  app.use(debugRouter((query, k) => services.retrieve(query, k)));
+  app.use(
+    debugRouter(
+      (query, k) => services.retrieve(query, k),
+      () => services.usage(),
+    ),
+  );
 
   app.use((_req, res) => {
     res.status(404).json({ error: "Not found" });

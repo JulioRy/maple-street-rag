@@ -3,3 +3,4 @@ node_modules/
 eval-results.json
 TASK_BRIEF.md
 *.log
+.cache/
