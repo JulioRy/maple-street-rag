@@ -6,6 +6,7 @@
     "start": "tsx src/server.ts",
     "dev": "tsx watch src/server.ts",
     "eval": "tsx src/eval/runEval.ts",
+    "eval:verbose": "tsx src/eval/runEval.ts --verbose",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

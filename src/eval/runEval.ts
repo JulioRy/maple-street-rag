@@ -34,7 +34,9 @@ const RESULTS_FILE = "eval-results.json";
 
 async function main(): Promise<void> {
   const { cases } = JSON.parse(await readFile(CASES_FILE, "utf8")) as { cases: EvalCase[] };
-  const only = process.argv[2]?.split(",");
+  const args = process.argv.slice(2);
+  const verbose = args.includes("--verbose");
+  const only = args.find((arg) => !arg.startsWith("--"))?.split(",");
   const selected = only ? cases.filter((c) => only.includes(c.id) || only.includes(c.category)) : cases;
 
   console.log(`Running ${selected.length} cases against ${BASE_URL} (concurrency ${CONCURRENCY})\n`);
@@ -44,6 +46,7 @@ async function main(): Promise<void> {
   const results = await mapWithConcurrency(selected, CONCURRENCY, async (evalCase) => {
     const result = await runCase(evalCase);
     printResult(result);
+    if (verbose) printConversation(evalCase, result);
     return result;
   });
 
@@ -120,6 +123,13 @@ function printResult(result: CaseResult): void {
   console.log(`FAIL ${result.id}: ${result.failures.join("; ")}`);
   if (result.note) console.log(`     note: ${result.note}`);
   if (result.answer) console.log(`     answer: ${result.answer.replace(/\s+/g, " ").slice(0, 300)}`);
+}
+
+/** --verbose: every turn the customer sent, then the reply that was checked. */
+function printConversation(evalCase: EvalCase, result: CaseResult): void {
+  for (const turn of evalCase.turns) console.log(`     Q: ${turn || "(empty message)"}`);
+  if (result.passed || !result.answer) console.log(`     A: ${(result.answer ?? `HTTP ${result.status}: ${result.error}`).replace(/\s+/g, " ")}`);
+  console.log("");
 }
 
 function printCategoryBreakdown(results: CaseResult[]): void {
