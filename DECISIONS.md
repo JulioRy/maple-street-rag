@@ -38,6 +38,22 @@ Context used to weigh them: ~2h budget, ~140 chunks, 58 + ~20 hidden eval cases,
 - Trade-off accepted: slightly uneven chunk sizes; long sections still get split by the cap.
 - Would switch to C if: never here, it fails "fact buried in a long guide" and makes citations vague.
 
+### Chunk size and overlap
+- Options: A) 800-char cap on the section body, no overlap; B) 500-char cap with ~100-char overlap; C) token-based windows.
+- Chosen: A
+- Why (in this context): measured section sizes in docs/: only one section (`general-faq.md`, 1180 chars) exceeds 800.
+  So almost every chunk is exactly one heading section, and the cap rarely fires.
+  When it does, the split happens at paragraph boundaries (one Q&A each in the FAQ), so there is no sentence to cut in half and overlap would only duplicate text.
+  Markdown tables split by line repeat their header row on each piece, so a row never loses its column names.
+- Trade-off accepted: the cap is on the body; the `[Title > Heading]` prefix adds a few characters on top.
+- Would switch to B if: a long unstructured document (no headings, no blank lines) is added and retrieval misses facts near the cuts.
+
+### PDF and HTML structure
+- Options: A) plain extracted text; B) convert structure into Markdown headings, then reuse the Markdown chunker.
+- Chosen: B
+- Why (in this context): one chunker for every format.
+  The contractor PDF has numbered sections ("2. Billing"), which become `##` headings; HTML `h1`-`h6` become `#` headings.
+
 ### Retrieval method
 - Options: A) vector only; B) BM25 only; C) hybrid (vector + BM25, merged with Reciprocal Rank Fusion).
 - Chosen: C
