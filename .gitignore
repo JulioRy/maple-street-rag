@@ -1,6 +1,6 @@
 node_modules/
 .env
-eval-results.json
+eval-results*.json
 TASK_BRIEF.md
 *.log
 .cache/
