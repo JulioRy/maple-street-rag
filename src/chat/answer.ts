@@ -85,7 +85,7 @@ export function applyGuardrails(reply: ModelReply, chunks: ScoredChunk[]): ChatR
   }
 
   return {
-    answer: reply.answer,
+    answer: stripMarkdownEmphasis(reply.answer),
     outcome: reply.outcome,
     sources: reply.outcome === "decline" ? [] : pickSources(reply.usedChunkIds, chunks),
   };
@@ -99,6 +99,11 @@ function pickSources(usedChunkIds: string[], chunks: ScoredChunk[]): Source[] {
     if (chunk) sources.push({ file: chunk.file, chunkId });
   }
   return sources;
+}
+
+/** The prompt asks for plain text, but models still add **bold** now and then; the customer should not see asterisks. */
+function stripMarkdownEmphasis(text: string): string {
+  return text.replace(/\*\*(.+?)\*\*|__(.+?)__/g, (_, bold, underscored) => bold ?? underscored);
 }
 
 /** US-style numbers: 555-0142, (555) 010-4120, 555.010.4120, 555 010 4120. */

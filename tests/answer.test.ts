@@ -39,6 +39,11 @@ describe("applyGuardrails", () => {
     expect(response).toEqual({ answer: SAFE_DECLINE_ANSWER, outcome: "decline", sources: [] });
   });
 
+  it("removes Markdown bold from the customer-facing answer", () => {
+    const response = applyGuardrails({ reasoning: "", answer: "It costs **$18** (__per cut__).", outcome: "answer", usedChunkIds: [] }, retrieved);
+    expect(response.answer).toBe("It costs $18 (per cut).");
+  });
+
   it("returns no sources for a decline", () => {
     const response = applyGuardrails({ reasoning: "", answer: "I can't help with that.", outcome: "decline", usedChunkIds: ["rental-tools.md#1"] }, retrieved);
     expect(response.sources).toEqual([]);
