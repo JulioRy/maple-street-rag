@@ -32,7 +32,12 @@ async function main(): Promise<void> {
     usage: () => provider.usage(),
   });
 
-  app.listen(config.PORT, () => {
+  app.listen(config.PORT, (error?: Error) => {
+    // Express 5 reports listen errors here (for example EADDRINUSE) instead of throwing.
+    if (error) {
+      console.error(`Could not listen on port ${config.PORT}: ${error.message}. Is another server already running? Set PORT in .env to use another port.`);
+      process.exit(1);
+    }
     console.log(
       `Maple Street assistant listening on http://localhost:${config.PORT} (${config.LLM_PROVIDER}: ${config.chatModel}, ${config.embeddingModel})`,
     );
