@@ -109,6 +109,17 @@ Context used to weigh them: ~2h budget, ~140 chunks, 58 + ~20 hidden eval cases,
 - Trade-off accepted: free-tier rate limits; the eval runs with low concurrency and retries on HTTP 429.
 - Would switch to A if: the rate limits make the eval too slow; the provider interface makes it a one-file change.
 
+### Which Gemini models
+- Options (measured with a smoke test through `provider.ts`, same JSON prompt):
+  A) `gemini-3.8-flash`: timed out at 20s; B) `gemini-3.5-flash`: 1.5s, correct JSON; C) `gemini-3.5-flash-lite`: 1.0s, correct JSON.
+  `gemini-2.5-flash` returned 404 for a new key.
+- Chosen: B for chat, configurable through `CHAT_MODEL`.
+- Why (in this context): arithmetic and multi-rule cases need the stronger model, and 1.5s fits well inside the 20s timeout.
+- Trade-off accepted: lower free-tier limits than C.
+- Would switch to C if: rate limits block the eval runs.
+- Embeddings: `gemini-embedding-001` (3072 dimensions, batches work).
+  `gemini-embedding-2` returned one vector for a list of two texts (it merges a list into one input), so batching would need one call per text.
+
 ### Web framework / sessions
 - Options: Express vs Fastify; sessions in a `Map` vs Redis.
 - Chosen: Express + zod, sessions in a `Map`.

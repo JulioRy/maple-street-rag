@@ -7,7 +7,7 @@ const envSchema = z.object({
     .min(1, "GEMINI_API_KEY is missing: copy .env.example to .env and set your key")
     .refine((key) => key !== "your-gemini-api-key-here", "GEMINI_API_KEY still has the placeholder value from .env.example"),
   PORT: z.coerce.number().int().positive().default(3000),
-  CHAT_MODEL: z.string().default("gemini-2.5-flash"),
+  CHAT_MODEL: z.string().default("gemini-3.5-flash"),
   EMBEDDING_MODEL: z.string().default("gemini-embedding-001"),
   MODEL_TIMEOUT_MS: z.coerce.number().int().positive().default(20_000),
   RETRIEVAL_K: z.coerce.number().int().positive().default(8),
