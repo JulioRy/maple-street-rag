@@ -8,7 +8,7 @@ No RAG framework: loading, filtering, chunking, hybrid retrieval and prompting a
 Needs Node 20+ and an OpenAI API key.
 
 ```bash
-git clone <repo> && cd maple-street-rag
+git clone https://github.com/JulioRy/maple-street-rag.git && cd maple-street-rag
 npm install
 cp .env.example .env   # then put your OpenAI key in .env (Windows cmd: copy .env.example .env)
 npm start              # ingests docs/, then listens on http://localhost:3000
