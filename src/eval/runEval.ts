@@ -26,8 +26,8 @@ interface CaseResult {
 }
 
 const BASE_URL = process.env.EVAL_BASE_URL ?? "http://localhost:3000";
-// Low by default: the free Gemini tier allows only a few requests per minute.
-const CONCURRENCY = Number(process.env.EVAL_CONCURRENCY ?? 1);
+// Small, so a run stays well inside provider rate limits.
+const CONCURRENCY = Number(process.env.EVAL_CONCURRENCY ?? 4);
 const REQUEST_TIMEOUT_MS = 180_000;
 const CASES_FILE = "cases.json";
 const RESULTS_FILE = "eval-results.json";

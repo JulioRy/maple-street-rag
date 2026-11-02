@@ -127,13 +127,19 @@ Context used to weigh them: ~2h budget, ~140 chunks, 58 + ~20 hidden eval cases,
 
 ### LLM provider
 - Options: A) OpenAI `gpt-4o-mini` + `text-embedding-3-small`; B) Google Gemini (free tier); C) local Ollama.
-- Chosen: B, behind a small `embed()` / `complete()` interface.
-- Why (in this context): free, one key for both chat and embeddings, quality comparable to A.
+- First chosen: B, because it is free and one key covers chat and embeddings.
   C would add a 5 GB install for reviewers and break the 5-command setup.
-- Trade-off accepted: free-tier rate limits; the eval runs with low concurrency and retries on HTTP 429.
-- Would switch to A if: the rate limits make the eval too slow; the provider interface makes it a one-file change.
+- Changed from B to A because the first full eval run died after 9 cases (all 9 passed): the Gemini free tier allows
+  20 chat requests per day per model (`GenerateRequestsPerDayPerProjectPerModel-FreeTier = 20`), and one eval run needs ~62.
+  A reviewer with a free Gemini key could not run the eval at all.
+- Chosen now: A by default; B stays available with `LLM_PROVIDER=gemini`.
+  Each provider is one file (`src/llm/openai.ts`, `src/llm/gemini.ts`) behind the same `embed()` / `complete()` interface,
+  and both share one timeout and retry policy (`callWithRetry`), with the SDKs' own retries turned off.
+- Trade-off accepted: OpenAI costs money (a few cents per eval run; see the README).
+- Retry lesson from the same run: a 429 that suggests waiting 37,505 s is an exhausted daily quota, not a burst.
+  Waits longer than 30 s now fail immediately with a clear "quota exceeded" error instead of retrying.
 
-### Which Gemini models
+### Which Gemini models (when `LLM_PROVIDER=gemini`)
 - Options (measured with a smoke test through `provider.ts`, same JSON prompt):
   A) `gemini-3.8-flash`: timed out at 20s; B) `gemini-3.5-flash`: 1.5s, correct JSON; C) `gemini-3.5-flash-lite`: 1.0s, correct JSON.
   `gemini-2.5-flash` returned 404 for a new key.
