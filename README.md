@@ -17,6 +17,7 @@ npm run eval           # in a second terminal
 
 `npm test` runs the unit tests (no key needed).
 `npm run eval:verbose` also prints each question and answer.
+`npm run ask -- "How much is the tile saw per day?" 2026-11-05` asks one question (the date is optional).
 
 ## How it works
 

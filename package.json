@@ -5,6 +5,7 @@
   "scripts": {
     "start": "tsx src/server.ts",
     "dev": "tsx watch src/server.ts",
+    "ask": "tsx src/ask.ts",
     "eval": "tsx src/eval/runEval.ts",
     "eval:verbose": "tsx src/eval/runEval.ts --verbose",
     "test": "vitest run",
