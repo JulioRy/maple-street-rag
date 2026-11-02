@@ -1,6 +1,7 @@
 import { createApp } from "./app.js";
+import { createChatService } from "./chat/answer.js";
+import { createSessionStore } from "./chat/sessionStore.js";
 import { loadConfig } from "./config.js";
-import { HttpError } from "./errors.js";
 import { createKnowledgeBase } from "./knowledgeBase.js";
 import { withEmbeddingCache } from "./llm/embeddingCache.js";
 import { createGeminiProvider } from "./llm/provider.js";
@@ -23,10 +24,15 @@ async function main(): Promise<void> {
   console.log(`Ingested ${report.indexed.length} files into ${report.chunks} chunks; skipped ${report.skipped.length}:`);
   for (const { file, reason } of report.skipped) console.log(`  - ${file}: ${reason}`);
 
+  const answer = createChatService({
+    provider,
+    search: (query, k) => knowledgeBase.search(query, k),
+    sessions: createSessionStore(),
+    k: config.RETRIEVAL_K,
+  });
+
   const app = createApp({
-    answer: async () => {
-      throw new HttpError(501, "Chat is not implemented yet");
-    },
+    answer,
     runIngest: () => knowledgeBase.reload(),
     retrieve: (query, k) => knowledgeBase.search(query, k),
     usage: () => provider.usage(),

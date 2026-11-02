@@ -121,9 +121,7 @@ async function callWithRetry<T>(timeoutMs: number, request: (abortSignal: AbortS
         throw new ModelError(status ? `provider returned HTTP ${status}` : describe(error));
       }
       const waitMs = Math.min(retryDelayMs(error, attempt), MAX_RATE_LIMIT_WAIT_MS);
-      console.warn(
-        `Model request failed with HTTP ${status}, retry ${attempt}/${MAX_ATTEMPTS - 1} in ${waitMs} ms: ${describe(error).slice(0, 300)}`,
-      );
+      console.warn(`Model request failed with HTTP ${status} (${failureSummary(error)}), retry ${attempt}/${MAX_ATTEMPTS - 1} in ${waitMs} ms`);
       await sleep(waitMs);
     } finally {
       clearTimeout(timer);
@@ -136,6 +134,16 @@ function retryDelayMs(error: unknown, attempt: number): number {
   const hint = /retry in ([\d.]+)s/i.exec(describe(error));
   if (hint?.[1]) return Math.ceil(Number(hint[1]) * 1000);
   return 1000 * 2 ** attempt;
+}
+
+/** For 429s, names the exhausted quota ("...requests_per_minute..., limit: 5"); otherwise the provider's message. */
+function failureSummary(error: unknown): string {
+  const message = describe(error);
+  const quotas = [...message.matchAll(/Quota exceeded for metric: ([^,\n]+), limit: (\d+)/g)].map(
+    ([, metric, limit]) => `${metric!.split("/").pop()} limit ${limit}`,
+  );
+  if (quotas.length > 0) return `quota exceeded: ${[...new Set(quotas)].join("; ")}`;
+  return (/"message":\s*"([^"]+)"/.exec(message)?.[1] ?? message).slice(0, 200);
 }
 
 function describe(error: unknown): string {
