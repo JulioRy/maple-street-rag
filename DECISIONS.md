@@ -99,11 +99,26 @@ Context used to weigh them: ~2h budget, ~140 chunks, 58 + ~20 hidden eval cases,
   Detection is by content (a "Valid ... through ..." line), not by file name, so a new flyer added live works.
 - Trade-off accepted: a flyer phrased differently gets no status tag (it is still indexed and answerable).
 
+### Model routing / tiers
+- Idea: route each question to a tier, as in a previous project: a cache, then rules without an LLM, then a cheap model, then a strong model.
+- Options: A) build it fully (response cache + rule-based answers + cheap/strong routing); B) a lite version: the query-rewrite call also returns a complexity flag that picks the model; C) do not build it, describe it for the multi-store design.
+- Chosen: C
+- Why (in this context), from measured numbers: one eval run is 61 chat calls, ~112k input and ~6.4k output tokens.
+  All `gpt-4o-mini`: ~$0.02. All `gpt-4.1`: ~$0.28. Routed with ~40% to `gpt-4.1`: ~$0.12.
+  The default model is already the cheap one and passes 57-58 of 58, so here routing would raise cost to fix one intermittent arithmetic case; the savings it exists for do not appear at this scale.
+  Rule-based answers without an LLM would be hardcoded answers, which the brief forbids and the live new document would break.
+  A response cache is worth ~0 in the eval (every case is unique) and adds a staleness risk unless keyed by date and docs version and cleared on ingest.
+  B would also make the rewrite call run on every message (+58 calls per run, +0.5-1 s latency), since today it only runs for follow-ups.
+- Trade-off accepted: no measured comparison of a stronger model on the arithmetic case.
+- Would switch to B if: question volume makes per-call cost matter (the 100-store scenario), or arithmetic failures persist after a calculator tool.
+
 ### Arithmetic
 - Options: A) free-form answer; B) a `reasoning` field in the JSON for step-by-step working; C) a calculator tool via function calling.
 - Chosen: B
 - Why (in this context): cheap, simple, fixes most errors (weekly rate, free cuts, minimum charge, point blocks).
 - Would switch to C if: arithmetic cases still fail after the prompt is tuned.
+- Update after the eval: time periods are now converted to days in code (`annotateDurations`), because `returns-04` ("opened 5 weeks ago") got "within the 30-day window" 3 times out of 3; with "5 weeks (= 35 days)" it was correct 3 out of 3 on `gpt-4o-mini`, `gpt-4.1-mini` and `gpt-5.4-mini`.
+  `lumber-01` (3 sheets x 2 paid cuts) still fails about one run in three, so C (a calculator tool) is the next step.
 
 ### Outcome and sources
 - Options: A) regex heuristics in code; B) a separate classifier call; C) one structured JSON response `{reasoning, answer, outcome, usedChunkIds}` validated with zod.
