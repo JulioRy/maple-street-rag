@@ -24,7 +24,8 @@ const envSchema = z
     const keyName = env.LLM_PROVIDER === "openai" ? "OPENAI_API_KEY" : "GEMINI_API_KEY";
     const apiKey = env[keyName];
     if (!apiKey || PLACEHOLDER_KEYS.has(apiKey)) {
-      ctx.addIssue({ code: "custom", path: [keyName], message: `${keyName} is missing: copy .env.example to .env and set your key` });
+      const problem = apiKey ? "still has the placeholder value" : "is missing";
+      ctx.addIssue({ code: "custom", path: [keyName], message: `${keyName} ${problem}: copy .env.example to .env and set your key` });
       return z.NEVER;
     }
     const defaults = DEFAULT_MODELS[env.LLM_PROVIDER];

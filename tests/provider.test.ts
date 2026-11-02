@@ -44,7 +44,11 @@ describe("loadConfig", () => {
     expect(config).toMatchObject({ apiKey: "g-test", chatModel: "gemini-3.5-flash-lite", embeddingModel: "gemini-embedding-001" });
   });
 
-  it.each([{}, { OPENAI_API_KEY: "your-openai-api-key-here" }])("explains a missing or placeholder key: %j", (env) => {
-    expect(() => loadConfig(env)).toThrow("OPENAI_API_KEY is missing");
+  it("explains a missing key", () => {
+    expect(() => loadConfig({})).toThrow("OPENAI_API_KEY is missing");
+  });
+
+  it("explains a key left at the .env.example placeholder", () => {
+    expect(() => loadConfig({ OPENAI_API_KEY: "your-openai-api-key-here" })).toThrow("OPENAI_API_KEY still has the placeholder value");
   });
 });
